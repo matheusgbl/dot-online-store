@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import '@/styles/card.css';
+
 export default {
   name: 'Card',
 }

@@ -1,6 +1,6 @@
 <template>
   <header id="header">
-    <nav  class="header-logo">
+    <nav class="header-logo">
       <h2>Logo</h2>
     </nav>
     <nav class="search_bar">
