@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import '@/styles/header.css'
 export default {
   name: 'Header',
 }
@@ -48,10 +47,38 @@ export default {
     font-weight: 600;
     z-index: 999;
   }
+
   .circle_icon {
     position: relative;
     bottom: 10px;
     right: 15px;
     color: #fad65f;
   }
+
+  #header {
+  align-items: center;
+  background-color: #8dd7cf;
+  display: flex;
+  padding: 20px 40px;
+  max-height: 80px;
+  width: 100%;
+}
+
+.search_bar {
+  margin-left: auto;
+}
+
+.search_bar input {
+  border: 2px solid rgb(180, 180, 180);
+  border-radius: 5px;
+  height: 40px;
+  outline: none;
+  width: 400px;
+  font-size: 20px;
+  text-indent: 10px;
+}
+
+.icons {
+  margin-left: auto;
+}
 </style>

@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import '@/styles/header.css'
 export default {
   name: 'Header',
 }
@@ -24,9 +23,19 @@ export default {
   .logo {
     width: 100px;
   }
+    
+  .search_bar {
+    margin-left: auto;
+  }
 
   .search_bar input {
-    width: 200px;
+    width: 250px;
+    border: 2px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    height: 40px;
+    outline: none;
+    font-size: 20px;
+    text-indent: 10px;
   }
 
   .search_icon {
@@ -45,5 +54,14 @@ export default {
   .bars_icon {
     cursor: pointer;
   }
+
+  .page_header_mobile {
+    align-items: center;
+    background-color: #8dd7cf;
+    display: flex;
+    padding: 20px 40px;
+    max-height: 80px;
+    width: 100%;
+}
 
 </style>

@@ -19,7 +19,6 @@
       <p class="movie_date">{{movie.date}}</p>
       <div>
         <p class="movie_card_title"><strong>{{movie.title}}</strong></p>
-        
         <div class="card_rate_genre">
         <p><strong><fa class="star_icon" icon="star" />{{movie.rate}}</strong></p>
         <p>{{movie.genre}}</p>
@@ -35,7 +34,6 @@
 </template>
 
 <script>
-import '@/styles/card.css';
 import { ref } from 'vue';
 import gsap from 'gsap';
 
@@ -99,6 +97,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
+  padding: 80px 120px;
 }
 
 img {

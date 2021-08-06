@@ -28,7 +28,8 @@ export default {
   data() {
 			return {
 				movies: [],
-        mobileView: true
+        mobileView: true,
+        showNav: false
 			}
 		},
     methods: {
@@ -38,7 +39,8 @@ export default {
       async getMovies() {
         const response = await api.get(`/list/20?api_key=${key}`)
           const data = await response.data.items;
-          const result = await api.get(`/genre/movie/list?api_key=${key}`)
+          const movieId = data.map(movie => movie.id)
+          const result = await api.get(`/movie/${movieId}?api_key=${key}`)
           const genreName = result.data.genres[0].name
           this.movies = data.map(movie => (
             {
