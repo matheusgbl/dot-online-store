@@ -40,7 +40,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .movie_image {
