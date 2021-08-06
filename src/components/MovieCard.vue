@@ -1,5 +1,6 @@
 <template>
   <div class="movie_card">
+    <fa class="heart_icon" icon="heart" size="2x" />
     <slot></slot>
   </div>
 </template>
@@ -18,5 +19,12 @@
 
 .movie_card:hover {
   transform: scale(1.1);
+}
+
+.heart_icon {
+  position: absolute;
+  margin-left: 70px;
+  margin-top: 10px;
+  color: #fa708a;
 }
 </style>

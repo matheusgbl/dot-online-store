@@ -1,10 +1,17 @@
 <template>
-  <h1 class="dot_h1">DOT Online Movie Shopping</h1>
+<transition
+      appear
+      @before-enter="beforeEnter"
+      @enter="enter"
+      :css="false"
+    >
+      <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
+    </transition>
   <section class="movie_card_list">
     <base-card v-bind:key="movie" v-for="movie in movies" class="movie_card">
-    <img class="movie_image" :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
+    <img :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
       <p class="movie_date">{{movie.date}}</p>
-      <div class="movie_card_info">
+      <div>
         <p class="movie_card_title"><strong>{{movie.title}}</strong></p>
         
         <div class="card_rate_genre">
@@ -15,7 +22,6 @@
       <div class="price">
         <p>R$ 79,99</p>
       </div>
-      <i class="fas fa-star"></i>
     <button class="buy_button">Adicionar</button>
     </base-card>
   </section>
@@ -23,6 +29,8 @@
 
 <script>
 import '@/styles/card.css';
+import { ref } from 'vue';
+import gsap from 'gsap';
 
 export default {
   name: 'MovieCardDetail',
@@ -32,11 +40,29 @@ export default {
 		data() {
 			return {};
 		},
+    setup() {
+    const showTitle = ref(true)
+    const beforeEnter = (el) => {
+      el.style.transform = 'translateX(-200px)'
+      el.style.opacity = 0
+    }
+    const enter = (el, done) => {
+      gsap.to(el, {
+        duration: 1.5,
+        x: 0,
+        opacity: 1,
+        ease: 'back.out(2)',
+        
+        onComplete: done
+      })
+    }
+    return { beforeEnter, enter, showTitle }
+  }
 }
 </script>
 
 <style scoped>
-.dot_h1 {
+h1 {
   text-align: center;
   margin-top: 2rem;
 }
@@ -48,7 +74,7 @@ export default {
   gap: 30px;
 }
 
-.movie_image {
+img {
   margin: 0 auto;
   display: flex;
   justify-content: center;
