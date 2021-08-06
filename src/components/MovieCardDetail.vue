@@ -1,4 +1,5 @@
 <template>
+  <h1 class="dot_h1">DOT Online Movie Shopping</h1>
   <section class="movie_card_list">
     <base-card v-bind:key="movie" v-for="movie in movies" class="movie_card">
     <img class="movie_image" :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
@@ -35,6 +36,11 @@ export default {
 </script>
 
 <style scoped>
+.dot_h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .movie_card_list {
   align-items: center;
   display: grid;

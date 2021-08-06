@@ -1,7 +1,7 @@
 <template>
   <header class="page_header" id="header">
     <nav class="header_logo">
-      <h2>Logo</h2>
+      <img class="logo" src="../assets/dot-logo.png" alt="logo">
     </nav>
     <nav class="search_bar">
       <input type="text" placeholder="Pesquisa" />
@@ -24,6 +24,10 @@ export default {
 </script>
 
 <style scoped>
+  .logo {
+    width: 100px;
+  }
+
   .search_icon {
     position: relative;
     right: 40px;

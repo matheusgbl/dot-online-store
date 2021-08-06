@@ -10,7 +10,7 @@
   max-width: 15rem;
   height: 30rem;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   transition: all 0.4s;
