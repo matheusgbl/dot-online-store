@@ -3,8 +3,8 @@
     id="app"
     class="page-app"
   >
-
-  <page-header />
+  <page-header-mobile v-if="mobileView" />
+  <page-header v-if="!mobileView" />
   <main class="page-main">
     <movie-card-detail :movies="movies" />
   </main>
@@ -13,6 +13,7 @@
 
 <script>
 import PageHeader from './components/Header.vue';
+import PageHeaderMobile from './components/MobileHeader.vue';
 import MovieCardDetail from './components/MovieCardDetail.vue';
 import api from './services/api';
 const key = '02e8b35def595ca263a687a353b4b1c7';
@@ -21,23 +22,23 @@ export default {
   name: 'App',
   components: {
     PageHeader,
+    PageHeaderMobile,
     MovieCardDetail,
   },
   data() {
 			return {
 				movies: [],
+        mobileView: true
 			}
 		},
-		created() {
-			this.getMovies();
-		},
     methods: {
+      handleView() {
+        this.mobileView = window.innerWidth <= 990;
+      },
       async getMovies() {
-          const response = await api.get(`/list/20?api_key=${key}`)
+        const response = await api.get(`/list/20?api_key=${key}`)
           const data = await response.data.items;
-          const genreId = data.map(movie => movie.genre_ids[0])
           const result = await api.get(`/genre/movie/list?api_key=${key}`)
-          console.log(genreId)
           const genreName = result.data.genres[0].name
           this.movies = data.map(movie => (
             {
@@ -49,8 +50,13 @@ export default {
               genre: genreName
             }
           ));
-        
       },
+      
+  },
+  created() {
+    this.getMovies();
+    this.handleView();
+    window.addEventListener('resize', this.handleView)
   },
 }
 </script>
