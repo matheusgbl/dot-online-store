@@ -7,7 +7,13 @@
     >
       <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
     </transition>
-  <section class="movie_card_list">
+    <transition
+      appear
+      @before-enter="beforeEnterMovie"
+      @enter="enterMovie"
+      :css="false"
+    >
+  <section v-if="showMovie" class="movie_card_list">
     <base-card v-bind:key="movie" v-for="movie in movies" class="movie_card">
     <img :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
       <p class="movie_date">{{movie.date}}</p>
@@ -25,6 +31,7 @@
     <button class="buy_button">Adicionar</button>
     </base-card>
   </section>
+    </transition>
 </template>
 
 <script>
@@ -42,6 +49,7 @@ export default {
 		},
     setup() {
     const showTitle = ref(true)
+    const showMovie = ref(true)
     const beforeEnter = (el) => {
       el.style.transform = 'translateX(-200px)'
       el.style.opacity = 0
@@ -52,11 +60,30 @@ export default {
         x: 0,
         opacity: 1,
         ease: 'back.out(2)',
-        
         onComplete: done
       })
     }
-    return { beforeEnter, enter, showTitle }
+    const beforeEnterMovie = (el) => {
+      el.style.transform = 'translateY(-200px)'
+      el.style.opacity = 0
+    }
+    const enterMovie = (el, done) => {
+      gsap.to(el, {
+        duration: 1.5,
+        y: 0,
+        opacity: 1,
+        ease: 'Power3.in',
+        onComplete: done
+      })
+    }
+    return { 
+      beforeEnter, 
+      enter, 
+      showTitle,
+      beforeEnterMovie,
+      enterMovie,
+      showMovie 
+      }
   }
 }
 </script>
