@@ -13,7 +13,7 @@
   margin-top: 30px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  transition: all 1s;
+  transition: all 0.4s;
 }
 
 .movie_card:hover {
