@@ -4,7 +4,8 @@
     class="page-app"
   >
   <page-header-mobile v-if="mobileView" />
-  <page-header v-if="!mobileView" />
+  <page-header @togglenav="navOpen = !navOpen" v-if="!mobileView" />
+  <cart-sidebar :open="navOpen" />
   <main class="page-main">
     <home :movies="movies" />
   </main>
@@ -14,6 +15,7 @@
 <script>
 import PageHeader from './components/Header.vue';
 import PageHeaderMobile from './components/MobileHeader.vue';
+import CartSidebar from './components/CartSidebar.vue'
 import Home from './pages/Home.vue';
 import api from './services/api';
 const key = '02e8b35def595ca263a687a353b4b1c7';
@@ -23,13 +25,15 @@ export default {
   components: {
     PageHeader,
     PageHeaderMobile,
+    CartSidebar,
     Home,
   },
   data() {
 			return {
 				movies: [],
         mobileView: true,
-        showNav: false
+        showNav: false,
+        navOpen: false
 			}
 		},
     methods: {
