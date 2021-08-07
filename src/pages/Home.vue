@@ -7,21 +7,25 @@
     >
       <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
     </transition>
-    <transition
+  <section class="movie_card_list">
+    <transition-group
       appear
       @before-enter="beforeEnterMovie"
       @enter="enterMovie"
-      :css="false"
     >
-  <section v-if="showMovie" class="movie_card_list">
-    <base-card v-bind:key="movie" v-for="movie in movies" class="movie_card">
+    <base-card 
+      :key="movie.id" 
+      v-for="(movie, index) in movies" 
+      :data-index="index"
+      class="card"
+    >
     <img :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
-      <p class="movie_date">{{movie.date}}</p>
+      <p class="movie_date">{{format_date(movie.date)}}</p>
       <div>
         <p class="movie_card_title"><strong>{{movie.title}}</strong></p>
         <div class="card_rate_genre">
         <p><strong><fa class="star_icon" icon="star" />{{movie.rate}}</strong></p>
-        <p>{{movie.genre}}</p>
+        <p>{{movie.genre[index]}}</p>
         </div>
       </div>
       <div class="price">
@@ -29,13 +33,16 @@
       </div>
     <button class="buy_button">Adicionar</button>
     </base-card>
+    </transition-group>
   </section>
-    </transition>
 </template>
 
 <script>
 import { ref } from 'vue';
 import gsap from 'gsap';
+
+import moment from 'moment';
+moment.locale("pt-br")
 
 export default {
   name: 'MovieCardDetail',
@@ -45,6 +52,13 @@ export default {
 		data() {
 			return {};
 		},
+    methods: { 
+      format_date(value) {
+         if (value) {
+           return moment(String(value)).format('LL')
+          }
+      },
+   },
     setup() {
     const showTitle = ref(true)
     const showMovie = ref(true)
@@ -62,7 +76,7 @@ export default {
       })
     }
     const beforeEnterMovie = (el) => {
-      el.style.transform = 'translateY(-200px)'
+      el.style.transform = 'translateY(100px)'
       el.style.opacity = 0
     }
     const enterMovie = (el, done) => {
@@ -70,7 +84,7 @@ export default {
         duration: 1.5,
         y: 0,
         opacity: 1,
-        ease: 'Power3.in',
+        delay: el.dataset.index * 0.2,
         onComplete: done
       })
     }
@@ -80,13 +94,14 @@ export default {
       showTitle,
       beforeEnterMovie,
       enterMovie,
-      showMovie 
+      showMovie,
       }
   }
 }
 </script>
 
 <style scoped>
+
 h1 {
   text-align: center;
   margin-top: 2rem;
@@ -100,6 +115,14 @@ h1 {
   padding: 80px 120px;
 }
 
+.card {
+  transition: all 0.4s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
 img {
   margin: 0 auto;
   display: flex;
@@ -110,12 +133,19 @@ img {
 }
 
 .movie_date {
-  margin-bottom: 0.5rem;
+  bottom: 18px;
+  position: relative;
+  color: #fff;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  justify-content: center;
 }
 
 .movie_card_title {
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-top: -0.3rem;
+  margin-bottom: 1rem;
   width: 100%;
   display: -webkit-box;
   -webkit-line-clamp: 1;

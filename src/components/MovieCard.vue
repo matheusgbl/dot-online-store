@@ -14,11 +14,6 @@
   margin-top: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  transition: all 0.4s;
-}
-
-.movie_card:hover {
-  transform: scale(1.05);
 }
 
 .heart_icon {

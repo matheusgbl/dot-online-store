@@ -6,7 +6,7 @@
   <page-header-mobile v-if="mobileView" />
   <page-header v-if="!mobileView" />
   <main class="page-main">
-    <movie-card-detail :movies="movies" />
+    <home :movies="movies" />
   </main>
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script>
 import PageHeader from './components/Header.vue';
 import PageHeaderMobile from './components/MobileHeader.vue';
-import MovieCardDetail from './components/MovieCardDetail.vue';
+import Home from './pages/Home.vue';
 import api from './services/api';
 const key = '02e8b35def595ca263a687a353b4b1c7';
 
@@ -23,7 +23,7 @@ export default {
   components: {
     PageHeader,
     PageHeaderMobile,
-    MovieCardDetail,
+    Home,
   },
   data() {
 			return {
@@ -37,11 +37,15 @@ export default {
         this.mobileView = window.innerWidth <= 990;
       },
       async getMovies() {
+        const genresArr = [];
         const response = await api.get(`/list/20?api_key=${key}`)
           const data = await response.data.items;
-          const movieId = data.map(movie => movie.id)
-          const result = await api.get(`/movie/${movieId}?api_key=${key}`)
-          const genreName = result.data.genres[0].name
+          await Promise.all( 
+            data.map(async (movie) => {
+            const result = await api.get(`/movie/${movie.id}?api_key=${key}`);
+            genresArr.push(result.data.genres);
+          }))
+          const genreName = genresArr.map((genre) => genre[0].name);
           this.movies = data.map(movie => (
             {
               date: movie.release_date,
@@ -53,7 +57,6 @@ export default {
             }
           ));
       },
-      
   },
   created() {
     this.getMovies();
