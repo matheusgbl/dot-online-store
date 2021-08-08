@@ -228,8 +228,10 @@ export default {
     padding: 40px 60px;
     place-items: center;
 
+  }
+  #main {
     &.open, &.openFav {
-      display: none;
+      margin-right: 80px;
     }
   }
 }

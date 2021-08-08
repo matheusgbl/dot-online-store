@@ -83,6 +83,10 @@ export default {
 }
 
 @media (max-width: 480px) {
+  .sidebar {
+    width: 20vw;
+  }
+
   .nav_mobile_fav {
     & p {
       display: none;

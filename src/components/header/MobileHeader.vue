@@ -60,7 +60,7 @@ export default {
     background-color: #8dd7cf;
     display: flex;
     max-height: 80px;
-    padding: 20px 40px;
+    padding: 20px 10px;
     width: 100%;
 }
 
