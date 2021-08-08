@@ -107,8 +107,10 @@ export default {
 
 <style lang="scss" scoped>
 #main {
+  transition: all 0.3s;
   &.open {
     margin-right: 250px;
+    transition: all 0.3s;
   }
 }
 
