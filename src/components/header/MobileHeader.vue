@@ -8,7 +8,7 @@
       <fa class="search_icon" icon="search" size="lg" />
     </nav>
     <nav class="icons">
-      <fa class="bars_icon" icon="bars" size="2x" />
+      <fa @click="$emit('togglemobile')" class="bars_icon" icon="bars" size="2x" />
     </nav>
   </header>
 </template>

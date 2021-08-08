@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .logo {
     width: 100px;
   }
@@ -38,6 +38,19 @@ export default {
   .heart_icon {
     margin-right: 20px;
     color: #fa708a;
+
+    &:hover {
+      color: #f83f3f;
+      cursor: pointer;
+    }
+  }
+
+  .cart_icon {
+    color: #222;
+    &:hover {
+      color: #111;
+      cursor: pointer;
+    }
   }
 
   .quantity {
@@ -66,23 +79,19 @@ export default {
 
 .search_bar {
   margin-left: auto;
-}
 
-.search_bar input {
-  border: 2px solid rgb(180, 180, 180);
-  border-radius: 5px;
-  height: 40px;
-  outline: none;
-  width: 400px;
-  font-size: 20px;
-  text-indent: 10px;
+  & input {
+    border: 2px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    height: 40px;
+    outline: none;
+    width: 400px;
+    font-size: 20px;
+    text-indent: 10px;
+  }
 }
 
 .icons {
   margin-left: auto;
-}
-
-.cart_icon:hover, .heart_icon:hover {
-  cursor: pointer;
 }
 </style>

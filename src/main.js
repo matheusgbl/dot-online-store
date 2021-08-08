@@ -10,6 +10,7 @@ import Header from './components/header/Header.vue';
 import MobileHeader from './components/header/MobileHeader.vue';
 import CartSidebar from './components/sidebar/CartSidebar.vue';
 import FavSidebar from './components/sidebar/FavSidebar.vue';
+import MobileSidebar from './components/sidebar/MobileSidebar.vue';
 
 library.add(fas);
 
@@ -20,6 +21,7 @@ app.component('page-header', Header);
 app.component('mobile-header', MobileHeader);
 app.component('cart-sidebar', CartSidebar);
 app.component('fav-sidebar', FavSidebar);
+app.component('mobile-sidebar', MobileSidebar);
 app.component('fa', FontAwesomeIcon);
 app.use(VueSidebarMenu);
 

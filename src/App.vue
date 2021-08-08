@@ -3,7 +3,8 @@
     id="app"
     class="page-app"
   >
-  <mobile-header v-if="mobileView" />
+  <mobile-header v-if="mobileView" @togglemobile="openMobile = !openMobile" />
+  <mobile-sidebar v-if="mobileView" :openMobile="openMobile" />
   <page-header
     @togglefav="openFav = !openFav"
     @togglenav="navOpen = !navOpen"
@@ -12,7 +13,7 @@
   <cart-sidebar v-if="!mobileView" :open="navOpen" />
   <fav-sidebar v-if="!mobileView" :openFav="openFav" />
   <main>
-    <home :open="navOpen || openFav" :movies="movies" />
+    <home :open="navOpen || openFav || openMobile" :movies="movies" />
   </main>
   </div>
 </template>
@@ -35,6 +36,7 @@ export default {
       showNav: false,
       navOpen: false,
       openFav: false,
+      openMobile: true,
     };
   },
   methods: {

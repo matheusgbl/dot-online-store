@@ -108,13 +108,13 @@ export default {
 <style lang="scss" scoped>
 #main {
   transition: all 0.3s;
-  &.open {
+  &.open, &.openFav {
     margin-right: 250px;
     transition: all 0.3s;
   }
 
-  &.openFav {
-    margin-right: 250px;
+  &.openMobile {
+    margin-right: 30px;
     transition: all 0.3s;
   }
 }
@@ -127,8 +127,8 @@ h1 {
 .movie_card_list {
   align-items: center;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
   padding: 80px 120px;
 }
 
@@ -179,10 +179,9 @@ img {
   display: flex;
   justify-content: center;
   margin-right: 10px;
-}
-
-.card_rate_genre > p {
-  margin-left: 8px;
+  & > p {
+    margin-left: 8px;
+  }
 }
 
 .buy_button {
@@ -204,4 +203,18 @@ img {
   }
 }
 
+@media (max-width: 990px) {
+  .movie_card_list {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px 60px;
+    place-items: center;
+
+      &.open, &.openFav {
+        display: none;
+    }
+  }
+}
 </style>
