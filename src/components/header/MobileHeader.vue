@@ -1,7 +1,7 @@
 <template>
   <header class="page_header_mobile" id="header">
     <nav class="header_logo">
-      <img class="logo" src="../assets/dot-logo.png" alt="logo">
+      <img class="logo" src="../../assets/dot-logo.png" alt="logo">
     </nav>
     <nav class="search_bar">
       <input type="text" placeholder="Pesquisa" />
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: 'MobileHeader',
 };
 </script>
 

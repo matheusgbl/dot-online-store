@@ -3,14 +3,14 @@
     id="app"
     class="page-app"
   >
-  <page-header-mobile v-if="mobileView" />
+  <mobile-header v-if="mobileView" />
   <page-header
     @togglefav="openFav = !openFav"
     @togglenav="navOpen = !navOpen"
     v-if="!mobileView"
   />
   <cart-sidebar v-if="!mobileView" :open="navOpen" />
-  <favs-sidebar v-if="!mobileView" :openFav="openFav" />
+  <fav-sidebar v-if="!mobileView" :openFav="openFav" />
   <main>
     <home :open="navOpen || openFav" :movies="movies" />
   </main>
@@ -18,10 +18,6 @@
 </template>
 
 <script>
-import PageHeader from './components/Header.vue';
-import PageHeaderMobile from './components/MobileHeader.vue';
-import CartSidebar from './components/CartSidebar.vue';
-import FavsSidebar from './components/FavsSidebar.vue';
 import Home from './pages/Home.vue';
 import api from './services/api';
 
@@ -30,10 +26,6 @@ const key = '02e8b35def595ca263a687a353b4b1c7';
 export default {
   name: 'App',
   components: {
-    PageHeader,
-    PageHeaderMobile,
-    CartSidebar,
-    FavsSidebar,
     Home,
   },
   data() {

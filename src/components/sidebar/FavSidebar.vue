@@ -1,16 +1,9 @@
 <template>
   <transition name="show">
-    <aside :class="{ open: open }" v-if="open" id="cart_sidebar" class="sidebar">
+    <aside :class="{ openFav: openFav }" v-if="openFav" id="cart_sidebar" class="sidebar">
         <nav class="nav_header">
-        <p>Meu Carrinho</p>
+        <p>Meus Favoritos</p>
         <a href="#">Esvaziar</a>
-      </nav>
-      <nav class="nav_footer">
-        <div class="total">
-        <p>Total:</p>
-        <strong>R$ 0</strong>
-        </div>
-        <button type="button">Finalizar compra</button>
       </nav>
     </aside>
   </transition>
@@ -18,8 +11,9 @@
 
 <script>
 export default {
+  name: 'FavSidebar',
   props: {
-    open: Boolean,
+    openFav: Boolean,
   },
 };
 </script>
@@ -40,7 +34,7 @@ export default {
   transition: 0.5s;
   padding: 40px 20px;
 
-  &.open {
+  &.openFav {
     display: block;
     }
 }
@@ -66,33 +60,4 @@ export default {
   }
 }
 
-.nav_footer {
-  position: absolute;
-  bottom: 0;
-  left: 20px;
-  width: 90%;
-
-  .total {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-
-  & > p {
-    font-size: 18px;
-  }
-
-  & > button {
-    border: none;
-    background-color: #6558f5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    padding: 10px 20px;
-    width: 100%;
-    color: white;
-    font-weight: 600;
-    font-size: 17px;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
-  }
-}
 </style>

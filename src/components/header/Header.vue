@@ -1,7 +1,7 @@
 <template>
   <header class="page_header" id="header">
     <nav class="header_logo">
-      <img class="logo" src="../assets/dot-logo.png" alt="logo">
+      <img class="logo" src="../../assets/dot-logo.png" alt="logo">
     </nav>
     <nav class="search_bar">
       <input type="text" placeholder="Pesquisa" />
