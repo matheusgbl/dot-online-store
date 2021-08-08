@@ -1,21 +1,21 @@
 <template>
+<div :class="{ open: open }" id="main">
 <transition
       appear
       @before-enter="beforeEnter"
       @enter="enter"
-      :css="false"
     >
       <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
     </transition>
-  <section class="movie_card_list">
+  <main class="movie_card_list">
     <transition-group
       appear
       @before-enter="beforeEnterMovie"
       @enter="enterMovie"
     >
-    <base-card 
-      :key="movie.id" 
-      v-for="(movie, index) in movies" 
+    <base-card
+      :key="movie.id"
+      v-for="(movie, index) in movies"
       :data-index="index"
       class="card"
     >
@@ -34,73 +34,83 @@
     <button class="buy_button">Adicionar</button>
     </base-card>
     </transition-group>
-  </section>
+  </main>
+</div>
 </template>
 
 <script>
+/* eslint-disable no-param-reassign */
 import { ref } from 'vue';
 import gsap from 'gsap';
-
 import moment from 'moment';
-moment.locale("pt-br")
+
+moment.locale('pt-br');
 
 export default {
   name: 'MovieCardDetail',
   props: {
     movies: Object,
-		},
-		data() {
-			return {};
-		},
-    methods: { 
-      format_date(value) {
-         if (value) {
-           return moment(String(value)).format('LL')
-          }
-      },
-   },
-    setup() {
-    const showTitle = ref(true)
-    const showMovie = ref(true)
+    open: Boolean,
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    format_date(value) {
+      if (value) {
+        return moment(String(value)).format('LL');
+      }
+      return value;
+    },
+  },
+  setup() {
+    const showTitle = ref(true);
+    const showMovie = ref(true);
     const beforeEnter = (el) => {
-      el.style.transform = 'translateX(-200px)'
-      el.style.opacity = 0
-    }
+      el.style.transform = 'translateX(-200px)';
+      el.style.opacity = 0;
+    };
     const enter = (el, done) => {
       gsap.to(el, {
         duration: 1.5,
         x: 0,
         opacity: 1,
         ease: 'back.out(2)',
-        onComplete: done
-      })
-    }
+        onComplete: done,
+      });
+    };
     const beforeEnterMovie = (el) => {
-      el.style.transform = 'translateY(100px)'
-      el.style.opacity = 0
-    }
+      el.style.transform = 'translateY(100px)';
+      el.style.opacity = 0;
+    };
     const enterMovie = (el, done) => {
       gsap.to(el, {
         duration: 1.5,
         y: 0,
         opacity: 1,
         delay: el.dataset.index * 0.2,
-        onComplete: done
-      })
-    }
-    return { 
-      beforeEnter, 
-      enter, 
+        onComplete: done,
+      });
+    };
+    return {
+      beforeEnter,
+      enter,
       showTitle,
       beforeEnterMovie,
       enterMovie,
       showMovie,
-      }
-  }
-}
+    };
+  },
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+#main {
+  &.open {
+    margin-right: 250px;
+  }
+}
 
 h1 {
   text-align: center;
@@ -117,10 +127,6 @@ h1 {
 
 .card {
   transition: all 0.4s;
-}
-
-.card:hover {
-  transform: scale(1.05);
 }
 
 img {
@@ -184,11 +190,11 @@ img {
   padding: 12px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-}
 
-.buy_button:hover {
-  cursor: pointer;
-  background-color: #3d33a8;
+  &:hover {
+    cursor: pointer;
+    background-color: #3d33a8;
+  }
 }
 
 </style>

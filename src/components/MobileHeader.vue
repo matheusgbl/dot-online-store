@@ -16,14 +16,14 @@
 <script>
 export default {
   name: 'Header',
-}
+};
 </script>
 
 <style scoped>
   .logo {
     width: 100px;
   }
-    
+
   .search_bar {
     margin-left: auto;
   }

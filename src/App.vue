@@ -6,8 +6,8 @@
   <page-header-mobile v-if="mobileView" />
   <page-header @togglenav="navOpen = !navOpen" v-if="!mobileView" />
   <cart-sidebar :open="navOpen" />
-  <main class="page-main">
-    <home :movies="movies" />
+  <main>
+    <home :open="navOpen" :movies="movies" />
   </main>
   </div>
 </template>
@@ -15,9 +15,10 @@
 <script>
 import PageHeader from './components/Header.vue';
 import PageHeaderMobile from './components/MobileHeader.vue';
-import CartSidebar from './components/CartSidebar.vue'
+import CartSidebar from './components/CartSidebar.vue';
 import Home from './pages/Home.vue';
 import api from './services/api';
+
 const key = '02e8b35def595ca263a687a353b4b1c7';
 
 export default {
@@ -29,45 +30,46 @@ export default {
     Home,
   },
   data() {
-			return {
-				movies: [],
-        mobileView: true,
-        showNav: false,
-        navOpen: false
-			}
-		},
-    methods: {
-      handleView() {
-        this.mobileView = window.innerWidth <= 990;
-      },
-      async getMovies() {
-        const genresArr = [];
-        const response = await api.get(`/list/20?api_key=${key}`)
-          const data = await response.data.items;
-          await Promise.all( 
-            data.map(async (movie) => {
-            const result = await api.get(`/movie/${movie.id}?api_key=${key}`);
-            genresArr.push(result.data.genres);
-          }))
-          const genreName = genresArr.map((genre) => genre[0].name);
-          this.movies = data.map(movie => (
-            {
-              date: movie.release_date,
-              title: movie.original_title,
-              rate: movie.vote_average,
-              img: movie.poster_path,
-              id: movie.id,
-              genre: genreName
-            }
-          ));
-      },
+    return {
+      movies: [],
+      mobileView: true,
+      showNav: false,
+      navOpen: false,
+    };
+  },
+  methods: {
+    handleView() {
+      this.mobileView = window.innerWidth <= 990;
+    },
+    async getMovies() {
+      const genresArr = [];
+      const response = await api.get(`/list/20?api_key=${key}`);
+      const data = await response.data.items;
+      await Promise.all(
+        data.map(async (movie) => {
+          const result = await api.get(`/movie/${movie.id}?api_key=${key}`);
+          genresArr.push(result.data.genres);
+        }),
+      );
+      const genreName = genresArr.map((genre) => genre[0].name);
+      this.movies = data.map((movie) => (
+        {
+          date: movie.release_date,
+          title: movie.original_title,
+          rate: movie.vote_average,
+          img: movie.poster_path,
+          id: movie.id,
+          genre: genreName,
+        }
+      ));
+    },
   },
   created() {
     this.getMovies();
     this.handleView();
-    window.addEventListener('resize', this.handleView)
+    window.addEventListener('resize', this.handleView);
   },
-}
+};
 </script>
 
 <style>

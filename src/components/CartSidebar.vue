@@ -1,79 +1,68 @@
 <template>
   <transition name="show">
-    <div class="sidebar" v-if="open">
-      <transition-group appear name="fade">
-        <a 
-          href="#" 
-          class="sidebar-element"
-         v-for="(item, index) in navElements" 
-         :key="item" 
-         :style="{'--index': index}"
-         >
-          <p>Meu Carrinho <a href="#">Esvaziar</a></p>
-        </a>
-        <div>
-          <p>Total:</p>
-          <button>Finalizar compra</button>
+    <aside :class="{ open: open }" id="cart_sidebar" class="sidebar">
+      <transition appear name="fade">
+        <div class="items">
+        <nav>
+        <p>Meu Carrinho</p>
+        <a href="#">Esvaziar</a>
+      </nav>
+      <nav>
+        <p>Total:</p>
+        <button>Finalizar </button>
+      </nav>
         </div>
-      </transition-group>
-    </div>
+      </transition>
+    </aside>
   </transition>
 </template>
 
 <script>
 export default {
   props: {
-    open: Boolean
+    open: Boolean,
   },
-  data() {
-    return {
-      navElements: [
-        'cart'
-      ]
-    }
-  }
-}
+};
 </script>
 
-<style scoped>
-   .sidebar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    flex-direction: column;
-    width: 60px;
-    height: calc(100vh - 50px);
-    padding-top: 48px;
-  }
+<style lang="scss" scoped>
+  .sidebar {
+    display: none;
+    height: 100%;
+    width: 20vw;
+    position: absolute;
+    z-index: 1;
+    border-top: 2px solid rgb(180, 180, 180);
+    border-left: 2px solid rgb(180, 180, 180);
+    border-bottom: 2px solid rgb(180, 180, 180);
+    top: 80px;
+    right: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 40px;
 
-  .sidebar-element {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    color: #fefefe;
-    background-color: #242424;
-  }
+    &.open {
+      display: block;
+    }
+}
 
-  show-enter {
-    opacity: 0;
-    transform: translateX(-60px)
+.show {
+    &-enter, &-leave-to {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+    &-enter-active, &-leave-active {
+      transition: all 500ms;
+    }
   }
-
-  show-enter-active, show-leave-active {
-    transition: all 500ms;
-  }
-
-  .fade-enter {
-    opacity: 0;
-    transform: translateX(-60px)
-  }
-
-  .fade-enter-active {
-    transition: all 500ms ease-in-out;
+  .fade {
+    &-enter {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+    &-enter-active {
+      transition: all 500ms ease-in-out;
+      transition-delay: calc( 50ms * var(--index) );
+    }
   }
 </style>
