@@ -27,23 +27,24 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  display: none;
-  height: calc(95vh - 35px);
-  width: 20vw;
-  position: absolute;
-  z-index: 1;
+  background-color: #eee;
   border-top: 2px solid rgb(180, 180, 180);
   border-left: 2px solid rgb(180, 180, 180);
   border-bottom: 2px solid rgb(180, 180, 180);
-  top: 80px;
-  right: 0;
+  display: none;
+  height: calc(95vh - 35px);
+  position: absolute;
   overflow-x: hidden;
-  transition: 0.5s;
   padding: 40px 20px;
+  right: 0;
+  transition: 0.5s;
+  top: 80px;
+  width: 20vw;
+  z-index: 1;
 
   &.open {
     display: block;
-    }
+  }
 }
 
 .show {
@@ -57,9 +58,9 @@ export default {
 }
 
 .nav_header {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
   & > p {
     font-weight: 600;
@@ -84,16 +85,16 @@ export default {
   }
 
   & > button {
-    border: none;
     background-color: #6558f5;
+    border: none;
+    border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    padding: 10px 20px;
-    width: 100%;
     color: white;
     font-weight: 600;
     font-size: 17px;
-    border-radius: 5px;
     margin-bottom: 0.5rem;
+    padding: 10px 20px;
+    width: 100%;
   }
 }
 </style>

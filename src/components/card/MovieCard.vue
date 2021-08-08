@@ -5,21 +5,26 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .movie_card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  max-width: 15rem;
-  height: 30rem;
-  text-align: center;
-  margin-top: 20px;
+  align-items: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  height: 30rem;
+  margin-top: 20px;
+  max-width: 15rem;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .heart_icon {
-  position: absolute;
+  color: #fa708a;
   margin-left: 70px;
   margin-top: 10px;
-  color: #fa708a;
+  position: absolute;
 }
 </style>

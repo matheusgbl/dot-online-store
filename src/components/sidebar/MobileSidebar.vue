@@ -24,19 +24,20 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  display: none;
-  height: calc(95vh - 35px);
-  width: 25vw;
-  position: absolute;
-  z-index: 1;
+  background-color: #eee;
   border-top: 2px solid rgb(180, 180, 180);
   border-left: 2px solid rgb(180, 180, 180);
   border-bottom: 2px solid rgb(180, 180, 180);
-  top: 80px;
-  right: 0;
+  display: none;
+  height: calc(95vh - 35px);
+  position: absolute;
   overflow-x: hidden;
-  transition: 0.5s;
   padding: 40px 20px;
+  right: 0;
+  transition: 0.5s;
+  top: 80px;
+  width: 25vw;
+  z-index: 1;
 
   &.openMobile {
     display: block;
@@ -54,8 +55,8 @@ export default {
 }
 
 .heart_icon {
-  margin-right: 18px;
   color: #fa708a;
+  margin-right: 18px;
 
   &:hover {
     cursor: pointer;
@@ -63,10 +64,10 @@ export default {
 }
 
 .nav_mobile_fav {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -75,9 +76,9 @@ export default {
 }
 
 .nav_mobile_cart {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 }
 </style>

@@ -1,38 +1,39 @@
 <template>
-<div :class="{ open: open }" id="main">
-<transition
-      appear
-      @before-enter="beforeEnter"
-      @enter="enter"
-    >
-      <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
-    </transition>
+  <div :class="{ open: open }" id="main">
+  <transition
+    appear
+    @before-enter="beforeEnter"
+    @enter="enter"
+  >
+    <h1 v-if="showTitle">DOT Online Movie Shopping</h1>
+  </transition>
   <main class="movie_card_list">
     <transition-group
       appear
       @before-enter="beforeEnterMovie"
       @enter="enterMovie"
-    >
-    <base-card
-      :key="movie.id"
-      v-for="(movie, index) in movies"
-      :data-index="index"
       class="card"
     >
-    <img :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
-      <p class="movie_date">{{format_date(movie.date)}}</p>
-      <div>
-        <p class="movie_card_title"><strong>{{movie.title}}</strong></p>
-        <div class="card_rate_genre">
-        <p><strong><fa class="star_icon" icon="star" />{{movie.rate}}</strong></p>
-        <p>{{movie.genre[index]}}</p>
+      <base-card
+        :key="movie.id"
+        v-for="(movie, index) in movies"
+        :data-index="index"
+        class="card"
+      >
+        <img :src="`https://image.tmdb.org/t/p/w200${movie.img}`">
+        <p class="movie_date">{{format_date(movie.date)}}</p>
+        <div>
+          <p class="movie_card_title"><strong>{{movie.title}}</strong></p>
+          <div class="card_rate_genre">
+          <p><strong><fa class="star_icon" icon="star" />{{movie.rate}}</strong></p>
+          <p>{{movie.genre[index]}}</p>
+          </div>
         </div>
-      </div>
-      <div class="price">
-        <p>R$ 79,99</p>
-      </div>
-    <button class="buy_button">Adicionar</button>
-    </base-card>
+        <div class="price">
+          <p>R$ 79,99</p>
+        </div>
+      <button class="buy_button">Adicionar</button>
+      </base-card>
     </transition-group>
   </main>
 </div>
@@ -52,10 +53,6 @@ export default {
     movies: Object,
     open: Boolean,
   },
-  data() {
-    return {
-    };
-  },
   methods: {
     format_date(value) {
       if (value) {
@@ -67,10 +64,12 @@ export default {
   setup() {
     const showTitle = ref(true);
     const showMovie = ref(true);
+
     const beforeEnter = (el) => {
       el.style.transform = 'translateX(-200px)';
       el.style.opacity = 0;
     };
+
     const enter = (el, done) => {
       gsap.to(el, {
         duration: 1.5,
@@ -80,10 +79,12 @@ export default {
         onComplete: done,
       });
     };
+
     const beforeEnterMovie = (el) => {
       el.style.transform = 'translateY(100px)';
       el.style.opacity = 0;
     };
+
     const enterMovie = (el, done) => {
       gsap.to(el, {
         duration: 1.5,
@@ -92,7 +93,15 @@ export default {
         delay: el.dataset.index * 0.2,
         onComplete: done,
       });
+      gsap.utils.toArray(el).forEach((movie) => {
+        const hover = gsap.to(movie, {
+          scale: 1.05, duration: 0.1, paused: true, ease: 'power1.inOut',
+        });
+        movie.addEventListener('mouseenter', () => hover.play());
+        movie.addEventListener('mouseleave', () => hover.reverse());
+      });
     };
+
     return {
       beforeEnter,
       enter,
@@ -108,6 +117,7 @@ export default {
 <style lang="scss" scoped>
 #main {
   transition: all 0.3s;
+
   &.open, &.openFav {
     margin-right: 250px;
     transition: all 0.3s;
@@ -117,89 +127,95 @@ export default {
     margin-right: 30px;
     transition: all 0.3s;
   }
-}
 
-h1 {
-  text-align: center;
-  margin-top: 2rem;
+  h1 {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .card {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .movie_card_list {
   align-items: center;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 20px;
+  gap: 40px 10px;
   padding: 80px 120px;
-}
 
-.card {
-  transition: all 0.4s;
-}
-
-img {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  width: 240px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.movie_date {
-  bottom: 18px;
-  position: relative;
-  color: #fff;
-  font-weight: 600;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  justify-content: center;
-}
-
-.movie_card_title {
-  overflow: hidden;
-  margin-top: -0.3rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical
-}
-
-.price {
-  margin-top: 0.8rem;
-}
-
-.star_icon {
-  margin-right: 5px;
-  color: #d8ae24;
-}
-
-.card_rate_genre {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-right: 10px;
-  & > p {
-    margin-left: 8px;
+  .card {
+    transition: all 0.4s;
   }
-}
 
-.buy_button {
-  background-color: #6558f5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin-top: 0.4rem;
-  width: 100%;
-  align-items: center;
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  padding: 12px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    width: 240px;
+  }
 
-  &:hover {
-    cursor: pointer;
-    background-color: #3d33a8;
+  .movie_date {
+    bottom: 18px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-weight: 600;
+    justify-content: center;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .movie_card_title {
+    display: -webkit-box;
+    margin-top: -0.3rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    width: 100%;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical
+  }
+
+  .price {
+    margin-top: 0.8rem;
+  }
+
+  .star_icon {
+    color: #d8ae24;
+    margin-right: 5px;
+  }
+
+  .card_rate_genre {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    & > p {
+      margin-left: 8px;
+    }
+  }
+
+  .buy_button {
+    align-items: center;
+    background-color: #6558f5;
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    color: #fff;
+    font-weight: 600;
+    margin-top: 0.4rem;
+    padding: 12px;
+    width: 100%;
+
+    &:hover {
+      background-color: #3d33a8;
+      cursor: pointer;
+    }
   }
 }
 
@@ -208,12 +224,12 @@ img {
     align-items: center;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 20px 10px;
     padding: 40px 60px;
     place-items: center;
 
-      &.open, &.openFav {
-        display: none;
+    &.open, &.openFav {
+      display: none;
     }
   }
 }

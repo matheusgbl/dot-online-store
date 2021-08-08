@@ -28,16 +28,16 @@ export default {
   }
 
   .search_icon {
-    position: relative;
-    right: 40px;
     bottom: 2px;
     color: #333;
     cursor: pointer;
+    position: relative;
+    right: 40px;
   }
 
   .heart_icon {
-    margin-right: 20px;
     color: #fa708a;
+    margin-right: 20px;
 
     &:hover {
       color: #f83f3f;
@@ -47,6 +47,7 @@ export default {
 
   .cart_icon {
     color: #222;
+
     &:hover {
       color: #111;
       cursor: pointer;
@@ -54,27 +55,27 @@ export default {
   }
 
   .quantity {
-    position: relative;
     bottom: 16px;
-    left: 5px;
     font-weight: 600;
+    left: 5px;
+    position: relative;
     z-index: 999;
   }
 
   .circle_icon {
-    position: relative;
     bottom: 10px;
-    right: 15px;
     color: #fad65f;
+    position: relative;
+    right: 15px;
   }
 
   #header {
-  align-items: center;
-  background-color: #8dd7cf;
-  display: flex;
-  padding: 20px 40px;
-  max-height: 80px;
-  width: 100%;
+    align-items: center;
+    background-color: #8dd7cf;
+    display: flex;
+    max-height: 80px;
+    padding: 20px 40px;
+    width: 100%;
 }
 
 .search_bar {
@@ -83,11 +84,11 @@ export default {
   & input {
     border: 2px solid rgb(180, 180, 180);
     border-radius: 5px;
+    font-size: 20px;
     height: 40px;
     outline: none;
-    width: 400px;
-    font-size: 20px;
     text-indent: 10px;
+    width: 400px;
   }
 }
 

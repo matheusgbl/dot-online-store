@@ -29,21 +29,21 @@ export default {
   }
 
   .search_bar input {
-    width: 250px;
     border: 2px solid rgb(180, 180, 180);
     border-radius: 5px;
+    font-size: 20px;
     height: 40px;
     outline: none;
-    font-size: 20px;
     text-indent: 10px;
+    width: 250px;
   }
 
   .search_icon {
-    position: relative;
-    right: 40px;
     bottom: 2px;
     color: #333;
     cursor: pointer;
+    position: relative;
+    right: 40px;
   }
 
   .icons {
@@ -59,8 +59,8 @@ export default {
     align-items: center;
     background-color: #8dd7cf;
     display: flex;
-    padding: 20px 40px;
     max-height: 80px;
+    padding: 20px 40px;
     width: 100%;
 }
 

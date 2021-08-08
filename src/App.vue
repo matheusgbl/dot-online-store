@@ -5,14 +5,14 @@
   >
   <mobile-header v-if="mobileView" @togglemobile="openMobile = !openMobile" />
   <mobile-sidebar v-if="mobileView" :openMobile="openMobile" />
-  <page-header
-    @togglefav="openFav = !openFav"
-    @togglenav="navOpen = !navOpen"
-    v-if="!mobileView"
-  />
-  <cart-sidebar v-if="!mobileView" :open="navOpen" />
-  <fav-sidebar v-if="!mobileView" :openFav="openFav" />
   <main>
+    <page-header
+      @togglefav="openFav = !openFav"
+      @togglenav="navOpen = !navOpen"
+      v-if="!mobileView"
+    />
+    <cart-sidebar v-if="!mobileView" :open="navOpen" />
+    <fav-sidebar v-if="!mobileView" :openFav="openFav" />
     <home :open="navOpen || openFav || openMobile" :movies="movies" />
   </main>
   </div>
@@ -22,7 +22,7 @@
 import Home from './pages/Home.vue';
 import api from './services/api';
 
-const key = '02e8b35def595ca263a687a353b4b1c7';
+const key = process.env.VUE_APP_API_KEY;
 
 export default {
   name: 'App',
@@ -33,10 +33,9 @@ export default {
     return {
       movies: [],
       mobileView: true,
-      showNav: false,
       navOpen: false,
       openFav: false,
-      openMobile: true,
+      openMobile: false,
     };
   },
   methods: {
