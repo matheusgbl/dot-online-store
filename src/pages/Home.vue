@@ -112,6 +112,11 @@ export default {
     margin-right: 250px;
     transition: all 0.3s;
   }
+
+  &.openFav {
+    margin-right: 250px;
+    transition: all 0.3s;
+  }
 }
 
 h1 {

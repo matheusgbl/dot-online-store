@@ -8,7 +8,7 @@
       <fa class="search_icon" icon="search" size="lg" />
     </nav>
     <nav class="icons">
-      <fa class="heart_icon" icon="heart" size="2x" />
+      <fa @click="$emit('togglefav')" class="heart_icon" icon="heart" size="2x" />
       <fa @click="$emit('togglenav')" class="cart_icon" icon="shopping-cart" size="2x" />
       <span class="quantity">0</span>
       <fa class="circle_icon" icon="circle" size="2x" />

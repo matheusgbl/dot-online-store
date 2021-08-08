@@ -4,10 +4,15 @@
     class="page-app"
   >
   <page-header-mobile v-if="mobileView" />
-  <page-header @togglenav="navOpen = !navOpen" v-if="!mobileView" />
-  <cart-sidebar :open="navOpen" />
+  <page-header
+    @togglefav="openFav = !openFav"
+    @togglenav="navOpen = !navOpen"
+    v-if="!mobileView"
+  />
+  <cart-sidebar v-if="!mobileView" :open="navOpen" />
+  <favs-sidebar v-if="!mobileView" :openFav="openFav" />
   <main>
-    <home :open="navOpen" :movies="movies" />
+    <home :open="navOpen || openFav" :movies="movies" />
   </main>
   </div>
 </template>
@@ -16,6 +21,7 @@
 import PageHeader from './components/Header.vue';
 import PageHeaderMobile from './components/MobileHeader.vue';
 import CartSidebar from './components/CartSidebar.vue';
+import FavsSidebar from './components/FavsSidebar.vue';
 import Home from './pages/Home.vue';
 import api from './services/api';
 
@@ -27,6 +33,7 @@ export default {
     PageHeader,
     PageHeaderMobile,
     CartSidebar,
+    FavsSidebar,
     Home,
   },
   data() {
@@ -35,6 +42,7 @@ export default {
       mobileView: true,
       showNav: false,
       navOpen: false,
+      openFav: false,
     };
   },
   methods: {
