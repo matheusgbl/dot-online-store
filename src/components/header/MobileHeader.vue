@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .logo {
     width: 100px;
   }
@@ -64,4 +64,17 @@ export default {
     width: 100%;
 }
 
+@media (max-width: 480px) {
+  .logo {
+    width: 80px;
+  }
+
+  .search_bar input {
+    width: 90%;
+  }
+
+  .search_icon {
+    display: none;
+  }
+}
 </style>

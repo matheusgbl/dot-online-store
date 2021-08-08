@@ -81,4 +81,18 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
+@media (max-width: 480px) {
+  .nav_mobile_fav {
+    & p {
+      display: none;
+    }
+  }
+
+  .nav_mobile_cart {
+    & p {
+      display: none;
+    }
+  }
+}
 </style>
